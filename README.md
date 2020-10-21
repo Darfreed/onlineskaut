@@ -8,3 +8,15 @@ Momentálně "hra" probíhá na našem Discord serveru. Bez žádné automatizac
 Z toho důvodu chci vytvořit webovou aplikaci v Djangu, která bude mít funkce této "hry".
 
 # Postava ON-LINE skauta
+https://github.com/Darfreed/onlineskaut/blob/main/retez.png
+
+Je to avatar pro jednotlivého skauta. Ten dostává předměty na základě bodů v kategorii.
+Tyto kategorie jsou:
+ - Znalosti (modré body)
+ - Schopnosti (červené body)
+ - Přátelství (zelené body)
+ 
+ Za každé dva body v jedné kategorii dostane avatar nový "lepší" předmět.
+ 
+ Za znalosti dostává pokrývku hlavy, za schopnosti zbraň, a za přátelství společníka.
+ 
