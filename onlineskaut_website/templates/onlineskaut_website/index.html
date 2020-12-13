@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}ON-LINE SKAUT{% endblock %}
+
+{% block content %}
+<h3>
+    Skauti - jsou suchozemští, vodní, dokonce i letečtí... a pak jsou zde taky ONLINE SKAUTI!
+    
+</h3>
+<h3>
+    Že jste o nich nikdy neslyšeli?
+</h3>
+<h3>
+    No, právě nyní se můžete stát prvními z nich!
+</h3>
+<a name="login" id="login" class="btn btn-dark" href="{% url 'login' %}" role="button">Přihlášení</a>
+<a name="register" id="register" class="btn btn-dark" href="{% url 'register' %}" role="button">Registrace</a>
+
+{% endblock %}
