@@ -1,7 +1,12 @@
+.table td, .table th {
+    padding: 0rem;
+    vertical-align: middle;
+    border: 0
+}
+
 footer {
     margin-top: 10px;
 }
 
-h3{
-    text-align: center;
-}
+
+ 

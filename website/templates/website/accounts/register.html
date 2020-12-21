@@ -8,17 +8,7 @@
 </h2>
 <form method="POST">
     {% csrf_token %}
-    {{ form.username.label }}
-    {{ form.username }}
-
-    {{ form.email.label }}
-    {{ form.email }}
-
-    {{ form.password1.label }}
-    {{ form.password1 }}
-
-    {{ form.password2.label }}
-    {{ form.password2 }}
+    {{ form.as_p }}
     <button type="submit">Registrovat</button>
 </form>
 {% endblock %}

@@ -1,31 +1,38 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm   
 from django.contrib.auth.models import User
-from .forms import RegisterForm, LoginForm
 from django.contrib.auth import authenticate, login, logout
+from django.utils import timezone
+
+from .forms import RegisterForm, LoginForm
+from .models import Post
 
 def index(request):
-    return render(request, '../onlineskaut_website/index.html', {})
+    return render(request, '../website/index.html', {})
 
 def profile(request):
-    return render(request, '../onlineskaut_website/profile.html', {})
+    return render(request, '../website/profile.html', {})
 
 def challenges(request):
-    return render(request, '../onlineskaut_website/challenges.html', {})
+    return render(request, '../website/challenges.html', {})
 
 def forum(request):
-    return render(request, '../onlineskaut_website/forum.html', {})
+    posts = Post.objects
+    return render(request, '../website/forum.html', {})
 
-def register(response):
-    if response.method == "POST":
-        form = RegisterForm(response.POST)
+def register(request):
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
+        name = request.POST.get('username')
+        passw = request.POST.get('password1')
         if form.is_valid():
-            form.save()
+            user = form.save()
+            user.save()
         return redirect("/login")
     else:
         form = RegisterForm()
 
-    return render(response, "../onlineskaut_website/accounts/register.html", {"form":form})
+    return render(request, "../website/accounts/register.html", {"form":form})
 
 def loginin(request):
     if request.method == 'POST':
@@ -38,4 +45,4 @@ def loginin(request):
             return redirect('/profile')
     else:
         form = LoginForm()
-    return render(request, '../onlineskaut_website/accounts/login.html', {'form': form})
+    return render(request, '../website/accounts/login.html', {'form': form})
