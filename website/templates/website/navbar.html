@@ -25,6 +25,14 @@
                 </ul>
             </div>
         </div>
+        <span style="float:right">
+            {% if user.is_authenticated %}
+                <span>{{user.username}}</span>
+                <span><a href="{% url 'logout' %}">Odhlášení</a></span>
+            {% else %}
+                <span><a href="{% url 'login' %}">Přihlášení</a></span>
+            {% endif %}
+        </span>
     </div>
 
     
