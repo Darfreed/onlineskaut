@@ -6,12 +6,12 @@
 <h1>
     Fórum
 </h1>
-{% for post in posts %}
+{% with post=autor.post %}
     <div class="post">
-            <p>{{ post.text }}</p>
+        <p>{{ post.text }}</p>
     </div>
     <div class="autor">
-        <b><i>Přidal/a uživatel/ka: </i></b> {{ post.Autor }}
+        <b><i>Přidal/a uživatel/ka: </i></b> {{ post.autor }}
     </div>
-{% endfor %}
+{% endwith %}
 {% endblock %}

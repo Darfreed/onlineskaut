@@ -1,17 +1,13 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm   
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render, redirect  
 from django.views.generic.base import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpRequest, HttpResponse
+from .forms import RegisterForm 
 
-from .forms import RegisterForm, LoginForm
-from .models import Post
-
-def index(request):
+def index(request: HttpRequest) -> HttpResponse:
     return render(request, '../website/index.html', {})
 
-def register(request):
+def register(request: HttpRequest) -> HttpResponse:
     if request.method == "POST":
         form = RegisterForm(request.POST)
         name = request.POST.get('username')

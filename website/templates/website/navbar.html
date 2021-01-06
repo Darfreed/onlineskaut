@@ -1,12 +1,13 @@
 {% load static %}
+{% with profile=user.profile%}
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <div class="row">
         <div class="col-sm-9 col-md-3">
             <img src="{% static 'images/logo.png' %}" class="img-fluid img-responsive" alt="logo">
         </div>
-        <div class="col-sm-3 col-md-9">
+        <div>
             <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <div class="navbar-toggler-icon"></div>
             </button>
             <div class="collapse navbar-collapse" id="collapsibleNavId">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0 align-center">
@@ -22,19 +23,21 @@
                         {% url 'forum' as forum_url %}
                         <a class="nav-link {% if request.path == forum_url %}disabled{% endif %}" href="{% url 'forum' %}">Fórum</a>
                     </li>
+                    <li class="nav-item">
+                        {% if user.is_authenticated %}
+                            {% if profile %}
+                            <h5>Přihlášen: {{profile.nickname|default:""}}</h5>
+                            {% else %}
+                            <h5>Přihlášen: {{user.username}}</h5>
+                            {% endif %}
+                            <a class="nav-link text-danger" href="{% url 'logout' %}">Odhlášení</a>
+                        {% else %}
+                            <a class="nav-link text-danger" href="{% url 'login' %}">Přihlášení</a>
+                        {% endif %}
+                    </li>
                 </ul>
             </div>
         </div>
-        <span style="float:right">
-            {% if user.is_authenticated %}
-                <span>{{user.username}}</span>
-                <span><a href="{% url 'logout' %}">Odhlášení</a></span>
-            {% else %}
-                <span><a href="{% url 'login' %}">Přihlášení</a></span>
-            {% endif %}
-        </span>
     </div>
-
-    
-    
 </nav>
+{% endwith %}

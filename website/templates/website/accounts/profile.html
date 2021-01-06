@@ -6,6 +6,7 @@
 <h1>
     Profil
 </h1>
+{% with profile=user.profile%}
 <div class="row">
     <div class="col-sm-12 col-md-6">
         <table class="table">
@@ -92,7 +93,11 @@
                     <td><img src="{% static 'images/path2791-4.png' %}" class="img-fluid img-responsive" alt="point"></td>
                 </tr>
                 <tr>
-                    <td rowspan="4">{{ user.username}}</td>
+                    {% if profile %}
+                        <td rowspan="4"><h2>{{profile.nickname|default:""}}</h2></td>
+                    {% else %}
+                        <td rowspan="4"><h2>{{user.username}}</h2></td>
+                    {% endif %}
                     <td><img src="{% static 'images/path2791-4.png' %}" class="img-fluid img-responsive" alt="point"></td>
                     <td><img src="{% static 'images/path2791-4.png' %}" class="img-fluid img-responsive" alt="point"></td>
                     <td><img src="{% static 'images/path2791-4.png' %}" class="img-fluid img-responsive" alt="point"></td>
@@ -116,4 +121,8 @@
         </table>
     </div>
 </div>
+<div>
+    {{ profile.bio|default:""}}
+</div>
+{% endwith %}
 {% endblock %}
