@@ -1,0 +1,43 @@
+version: "3.7"
+
+x-service-volumes: &service-volumes
+  - ./:/app/:rw,cached
+
+x-database-variables: &database-variables
+  POSTGRES_DB: postgres
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
+
+x-app-variables: &app-variables
+  <<: *database-variables
+  POSTGRES_HOST: postgres
+
+services:
+  website:
+    image: onlineskaut-website:latest
+    command: python manage.py runserver 127.0.0.1:8000
+    volumes: *service-volumes
+    enviroment: *app-variables
+    depends_on: 
+      - db-migrate
+    ports:
+      - "8000:8000"
+  
+  db-migrate:
+    image: onlineskaut-website:latest
+    command: python manage.py migrate
+    volumes: *service-volumes
+    enviroment: *app-variables
+    depends_on: 
+      - db-migrate
+
+  postgres:
+    image: postgres
+    port:
+      - "5432:5432"
+    enviroment: *database-variables
+    volumes:
+      - db-data:/var/lib/postgresql
+
+volumes:
+  db-data:
